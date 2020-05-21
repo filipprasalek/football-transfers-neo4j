@@ -1,0 +1,15 @@
+{
+  "name": "football-transfers-neo4j",
+  "version": "1.0.0",
+  "description": "Playground app that is using neo4j to store football transfers",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "test"
+  },
+  "author": "filipprasalek@gmail.com",
+  "license": "ISC",
+  "dependencies": {
+    "hapi": "^18.1.0"
+  }
+}
