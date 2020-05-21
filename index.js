@@ -1,6 +1,7 @@
 'use strict';
 
 const Hapi = require('hapi');
+const db = require('./db.js')
 
 const init = async () => {
   const server = new Hapi.Server({
@@ -16,5 +17,9 @@ process.on('unhandledRejection', err => {
   console.log(err);
   process.exit(1);
 });
+
+process.on('exit', () => {
+  db.close()
+})
 
 init();
