@@ -21,7 +21,6 @@ async function getPlayerTransfersByPlayerId(request, h) {
   if (playerTransfers.length === 0) {
     return h.response(errorResponse('Could not find proper transfers of a player with id ' + request.params.id)).code(404);
   }
-  console.log(playerTransfers[0].get(0))
   return h.response(playerTransfers[0].get(0)).code(200);
 }
 

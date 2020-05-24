@@ -16,10 +16,12 @@ async function getClub(request, h) {
 }
 
 async function getCashFlow(request, h) {
-  console.log(JSON.stringify(request));
-  h.response({'ok': 'ok'}).send(200);
+  const clubCashFlow = await runDBQuery(clubQueries.getCashFlowByClub(request.params.id));
+  if (clubCashFlow.length === 0) {
+    return h.response(errorResponse('Could not find cash flow for club with id ' + request.params.id)).code(404);
+  }
+  return h.response(clubCashFlow.map(it => it.get(0))).code(200);
 }
-
 module.exports = [
   { method: 'GET', path: '/club', handler: getClub },
   { method: 'GET', path: '/club/{id}/cash-flow', handler: getCashFlow },

@@ -20,14 +20,14 @@ const getClubByName = (name = '.*') => {
 
 const getCashFlowByClub = (clubId) => {
   const query = [
-    'MATCH (t:Transfer)',
+    'MATCH (p:Player)<-[:OF_PLAYER]-(t:Transfer)',
     'MATCH (seller)<-[:FROM_CLUB]-(t:Transfer)-[:TO_CLUB]->(buyer)',
     `WHERE t.numericFee > 0 AND (id(seller) = ${clubId} OR id(buyer) = ${clubId})`,
-    'WITH seller, buyer, sum(t.numericFee) AS cash_flow, count(t) AS player_count',
-    'RETURN buyer, cash_flow, player_count, seller',
+    'WITH seller, buyer, sum(t.numericFee) AS cash_flow, collect(p.name) as players',
+    'RETURN {buyer: buyer.name, seller: seller.name, cash_flow: cash_flow, players: players}',
     'ORDER BY cash_flow DESC'
   ];
-  return query.join(' ');
+  return query.join(' '); 
 }
 
 module.exports = {
