@@ -4,7 +4,7 @@
   "description": "Playground app that is using neo4j to store football transfers",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js",
+    "start": "nodemon index.js",
     "test": "test"
   },
   "author": "filipprasalek@gmail.com",
@@ -12,5 +12,8 @@
   "dependencies": {
     "hapi": "^18.1.0",
     "neo4j-driver": "^4.0.2"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.4"
   }
 }
